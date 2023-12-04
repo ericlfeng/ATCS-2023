@@ -9,7 +9,7 @@ from background import Background
 WIDTH, HEIGHT = 800, 600
 FPS = 60
 PLAYER_SPEED = 10
-AI_SPEED = 4
+AI_SPEED = 10
 BACKGROUND_SPEED = 2
 
 # Initialize Pygame
