@@ -1,4 +1,5 @@
 #NOTE: input_symbol is distance to player1 and state is speed
+#Or input_symbol is button pressed and state is current foot
 
 class FSM:
     def __init__(self, initial_state):

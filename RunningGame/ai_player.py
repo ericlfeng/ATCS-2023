@@ -19,18 +19,19 @@ class AIPlayer(Player):
         self.speed += math.log(abs(distance)) * -0.01
         self.rect.x -= self.speed
 
-    def init_fsm(self):
-        self.fsm.add_transition(" ", "SOUTH", self.move_south, "SOUTH")
-        self.fsm.add_transition(" ", "EAST", self.move_east, "EAST")
-        self.fsm.add_transition(" ", "NORTH", self.move_north, "NORTH")
-        self.fsm.add_transition(" ", "WEST", self.move_west, "WEST")
+    # def init_fsm(self):
+    #     self.fsm.add_transition(" ", "SOUTH", self.move_south, "SOUTH")
+    #     self.fsm.add_transition(" ", "EAST", self.move_east, "EAST")
+    #     self.fsm.add_transition(" ", "NORTH", self.move_north, "NORTH")
+    #     self.fsm.add_transition(" ", "WEST", self.move_west, "WEST")
 
-        self.fsm.add_transition("$", "SOUTH", self.move_south, "STOP")
-        self.fsm.add_transition("$", "EAST", self.move_east, "STOP")
-        self.fsm.add_transition("$", "NORTH", self.move_north, "STOP")
-        self.fsm.add_transition("$", "WEST", self.move_west, "STOP")
-
-        self.fsm.add_transition(None, "STOP", None, None)
+    #     self.fsm.add_transition("$", "SOUTH", self.move_south, "STOP")
+    #     self.fsm.add_transition("$", "EAST", self.move_east, "STOP")
+    #     self.fsm.add_transition("$", "NORTH", self.move_north, "STOP")
+    #     self.fsm.add_transition("$", "WEST", self.move_west, "STOP")
+        
+    #     self.fsm.add_transition(None, "STOP", None, None)
+        
 
     def move(self, speed):
         self.rect.x += self.speed
