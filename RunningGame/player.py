@@ -1,8 +1,9 @@
 import pygame
 from FSM import FSM
+from background import Background
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, color, x, y, speed):
+    def __init__(self, x, y, speed):
         super().__init__()
 
         self.speed = speed
@@ -18,6 +19,10 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        self.pause = False
+        self.distance = 0
+        self.lasttenthsecond = 0
+        self.fivesectotal = []
 
         self.clock = pygame.time.Clock()
         self.dt = 0
@@ -28,8 +33,8 @@ class Player(pygame.sprite.Sprite):
 
     def init_fsm(self):
         self.fsm.add_transition("right", "right", self.fall, "fall")
-        self.fsm.add_transition("right", "left", self.left, "left")
-        self.fsm.add_transition("left", "right", self.right, "right")
+        self.fsm.add_transition("right", "left", self.right, "right")
+        self.fsm.add_transition("left", "right", self.left, "left")
         self.fsm.add_transition("left", "left", self.fall, "fall")
 
         self.fsm.add_transition("right", "fall", self.right, "right")
@@ -46,11 +51,17 @@ class Player(pygame.sprite.Sprite):
     
     def left(self):
         self.image = self.left1
+        self.pause = False
+        self.distance += 1
+        self.lasttenthsecond += 1
     def right(self):
         self.image = self.right1
+        self.pause = False
+        self.distance += 1
+        self.lasttenthsecond += 1
     def fall(self):
         self.image = self.fall1
-        pygame.time.wait(1000)
+        self.pause = True
         
     def update(self, input=None):
         #Use the finite state machine to process input

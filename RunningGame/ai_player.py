@@ -2,8 +2,8 @@ from player import Player
 import math
 
 class AIPlayer(Player):
-    def __init__(self, color, x, y, target_player, base_speed):
-        super().__init__(color, x, y, base_speed)
+    def __init__(self, x, y, target_player, base_speed):
+        super().__init__(x, y, base_speed)
         self.target_player = target_player
 
     def update(self):
