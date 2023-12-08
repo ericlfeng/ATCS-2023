@@ -41,6 +41,7 @@ class main_game:
         # Additional variables for key tapping
         self.key_left_tapped = False
         self.key_right_tapped = False
+        self.current_second = 0
 
 
     def run(self):
@@ -79,7 +80,18 @@ class main_game:
             # if self.dt > 120:
             #     self.dt = 0
             #print(self.clock.get_rawtime())
-            print(time.time() - self.start_time)
+            self.current_time = time.time() - self.start_time
+            if(self.current_time//1 != self.current_second):
+                self.current_second = self.current_time//1
+                self.player1.fivesectotal.append(self.player1.lastsecond)
+                self.player1.lastsecond = 0
+                if len(self.player1.fivesectotal) >= 5:
+                    self.player1.fivesectotal.pop(0)
+            self.player1.update_speed()
+            
+                
+
+
             
             self.all_sprites.update()
             

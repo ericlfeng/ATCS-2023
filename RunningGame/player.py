@@ -21,7 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = y
         self.pause = False
         self.distance = 0
-        self.lasttenthsecond = 0
+        self.lastsecond = 0
         self.fivesectotal = []
 
         self.clock = pygame.time.Clock()
@@ -53,12 +53,12 @@ class Player(pygame.sprite.Sprite):
         self.image = self.left1
         self.pause = False
         self.distance += 1
-        self.lasttenthsecond += 1
+        self.lastsecond += 1
     def right(self):
         self.image = self.right1
         self.pause = False
         self.distance += 1
-        self.lasttenthsecond += 1
+        self.lastsecond += 1
     def fall(self):
         self.image = self.fall1
         self.pause = True
@@ -69,3 +69,8 @@ class Player(pygame.sprite.Sprite):
     
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x , self.rect.y ))
+
+    def update_speed(self):
+        average = sum(self.fivesectotal)/5
+        #TODO: Change the location based on speed
+
