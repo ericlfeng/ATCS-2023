@@ -69,7 +69,7 @@ class Player(pygame.sprite.Sprite):
         #Use the finite state machine to process input
         if self.pause == True and input != None:
             self.image = self.fall2
-            self.speed = -5
+            self.speed = -15
             self.counter += 1
             if self.counter >= 10:
                 self.fsm.process(input)

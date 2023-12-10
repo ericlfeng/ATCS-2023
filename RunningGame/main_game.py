@@ -17,7 +17,7 @@ class main_game:
     PLAYER_SPEED = 10
     AI_SPEED = 0
     BACKGROUND_SPEED = 2
-    RACE_LENGTH = 1000
+    RACE_LENGTH = 10
     SPEED_UPDATE_RATE = 0.1
 
     def __init__(self):
@@ -56,7 +56,22 @@ class main_game:
             # Set fps to 120
             self.dt += self.clock.tick(120)
             if self.player1.distance >= self.RACE_LENGTH:
-                running = False
+                if self.player1.rect.x > self.player2.rect.x:
+                    win_message = "You Win!"
+                elif self.player1.rect.x < self.player2.rect.x:
+                    self.text_color = (255, 0, 0)
+                    win_message = "The AI Wins..."
+                else:
+                    win_message = "Tie"
+                self.text = self.font.render(win_message, True, self.text_color) 
+                self.textRect = self.text.get_rect()
+                self.textRect.center = (self.WIDTH // 2, self.HEIGHT // 4)
+                # self.all_sprites.update()
+                # self.all_sprites.draw(self.screen)
+                self.screen.blit(self.text, self.textRect)
+                pygame.display.flip()
+                pygame.time.wait(3000)
+                break
             # Handle closing the window
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -123,13 +138,13 @@ class main_game:
                 self.all_sprites.draw(self.screen)
 
 
-        print("Game Over")
-        if self.player1.rect.x > self.player2.rect.x:
-            print("You Win!")
-        elif self.player1.rect.x < self.player2.rect.x:
-            print("The AI Wins...")
-        else:
-            print("Tie")
+        # print("Game Over")
+        # if self.player1.rect.x > self.player2.rect.x:
+        #     print("You Win!")
+        # elif self.player1.rect.x < self.player2.rect.x:
+        #     print("The AI Wins...")
+        # else:
+        #     print("Tie")
         # Quit the game
         pygame.quit()
         sys.exit()
