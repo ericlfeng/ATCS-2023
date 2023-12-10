@@ -17,7 +17,7 @@ class main_game:
     PLAYER_SPEED = 10
     AI_SPEED = 0
     BACKGROUND_SPEED = 2
-    RACE_LENGTH = 10
+    RACE_LENGTH = 500
     SPEED_UPDATE_RATE = 0.1
 
     def __init__(self):
