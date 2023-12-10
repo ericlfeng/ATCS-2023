@@ -71,7 +71,7 @@ class Player(pygame.sprite.Sprite):
             self.image = self.fall2
             self.speed = -15
             self.counter += 1
-            if self.counter >= 10:
+            if self.counter >= 20:
                 self.fsm.process(input)
                 self.counter = 0
                 self.pause = False
