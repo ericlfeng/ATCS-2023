@@ -77,24 +77,23 @@ class main_game:
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == KEYDOWN:                        
-                        #TODO:Need work here
                     if event.key == K_LEFT:
                         self.player1.update("left")
                         self.player1.lastsecond += 1
                         #self.background.move(10)
-                        # self.key_left_tapped = True
+                        self.key_left_tapped = True
                     elif event.key == K_RIGHT:
                         self.player1.update("right")
                         self.player1.lastsecond += 1
                         #self.background.move(10)
-                        # self.key_right_tapped = True
+                        self.key_right_tapped = True
             
             # Check for key release
-            #keys = pygame.key.get_pressed()
-            # if not keys[K_LEFT]:
-            #     self.key_left_tapped = False
-            # if not keys[K_RIGHT]:
-            #     self.key_right_tapped = False
+            keys = pygame.key.get_pressed()
+            if not keys[K_LEFT]:
+                self.key_left_tapped = False
+            if not keys[K_RIGHT]:
+                self.key_right_tapped = False
 
 
             # Only update every 120 fps
