@@ -1,38 +1,41 @@
 from player import Player
 import math
+import random
 
 class AIPlayer(Player):
-    def __init__(self, x, y, target_player, base_speed):
+    def __init__(self, x, y, target_player, base_speed, screen_width):
         super().__init__(x, y, base_speed)
         self.target_player = target_player
+        self.screen_width = screen_width
 
     def update(self):
-        distance = self.target_player.rect.x - self.rect.x
-        # if distance > 0:
-        #     self.speed -= 0.1
-        # elif distance > 1:
-        #     self.speed -= 0.1
-        # elif distance < 0:
-        #     self.speed += 0.1
-        # elif distance < 0:
-        #     self.speed += 0.1
-        self.speed += math.log(abs(distance)) * -0.01
-        self.rect.x -= self.speed
+        # distance = self.target_player.rect.x - self.rect.x
+        # self.speed += math.log(abs(distance) +1) * 0.01
+        # self.rect.x += self.speed
+        return
 
-    # def init_fsm(self):
-    #     self.fsm.add_transition(" ", "SOUTH", self.move_south, "SOUTH")
-    #     self.fsm.add_transition(" ", "EAST", self.move_east, "EAST")
-    #     self.fsm.add_transition(" ", "NORTH", self.move_north, "NORTH")
-    #     self.fsm.add_transition(" ", "WEST", self.move_west, "WEST")
-
-    #     self.fsm.add_transition("$", "SOUTH", self.move_south, "STOP")
-    #     self.fsm.add_transition("$", "EAST", self.move_east, "STOP")
-    #     self.fsm.add_transition("$", "NORTH", self.move_north, "STOP")
-    #     self.fsm.add_transition("$", "WEST", self.move_west, "STOP")
+    def move(self):
+        self.pause = False
+        self.speed += (random.randint(0, 10) - 5)
+        if self.speed > 10:    
+            self.speed -= 5
+        elif self.speed < -10:
+            self.speed += 5
         
-    #     self.fsm.add_transition(None, "STOP", None, None)
-        
+        if self.rect.x >= self.screen_width:
+            self.speed = -5
+        elif self.rect.x <= 0:
+            self.speed = 5
 
-    def move(self, speed):
+        if self.rect.x > self.screen_width // 3 * 2:
+            self.speed -= 1
+        elif self.rect.x < self.screen_width // 3:
+            self.speed += 1
+        
+        if self.image == self.left1:
+            self.image = self.right1
+        elif self.image == self.right1:
+            self.image = self.left1
+
         self.rect.x += self.speed
 

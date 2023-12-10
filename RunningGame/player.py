@@ -1,6 +1,7 @@
 import pygame
 from FSM import FSM
 from background import Background
+import math
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, speed):
@@ -23,6 +24,7 @@ class Player(pygame.sprite.Sprite):
         self.distance = 0
         self.lastsecond = 0
         self.fivesectotal = []
+        self.counter = 0
 
         self.clock = pygame.time.Clock()
         self.dt = 0
@@ -65,12 +67,31 @@ class Player(pygame.sprite.Sprite):
         
     def update(self, input=None):
         #Use the finite state machine to process input
+        if self.pause == True and input != None:
+            self.image = self.fall2
+            self.speed = -5
+            self.counter += 1
+            if self.counter >= 10:
+                self.fsm.process(input)
+                self.counter = 0
+                self.pause = False
+            return
         self.fsm.process(input) 
     
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x , self.rect.y ))
 
-    def update_speed(self):
+    def update_speed(self, SPEED_UPDATE_RATE):
         average = sum(self.fivesectotal)/5
-        #TODO: Change the location based on speed
+        #Change the location based on speed
+        #Average is extimated to be between 20 and 10 divided by SPEED_UPDATE_RATE
+        normalized_average = average/SPEED_UPDATE_RATE - 15
+        self.speed = abs(normalized_average) / normalized_average * 30 * math.log10(abs(normalized_average) +1)
+
+        # print(self.speed)
+
+    def move(self):
+        self.rect.x += self.speed
+        
+
 
