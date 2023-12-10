@@ -121,10 +121,11 @@ class main_game:
             self.all_sprites.draw(self.screen)
 
             #Countdown
-            self.text = self.font.render('Distance Left: ' + str(self.RACE_LENGTH - self.player1.distance), True, self.text_color) 
-            self.textRect = self.text.get_rect()
-            self.textRect.center = (self.WIDTH // 2, self.HEIGHT // 3)
-            self.screen.blit(self.text, self.textRect)
+            if self.RACE_LENGTH - self.player1.distance > 0:
+                self.text = self.font.render('Distance Left: ' + str(self.RACE_LENGTH - self.player1.distance), True, self.text_color) 
+                self.textRect = self.text.get_rect()
+                self.textRect.center = (self.WIDTH // 2, self.HEIGHT // 3)
+                self.screen.blit(self.text, self.textRect)
 
             # Update display
             pygame.display.flip()
